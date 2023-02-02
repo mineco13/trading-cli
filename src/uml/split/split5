@@ -1,0 +1,113 @@
+@startuml
+namespace usecases #DDDDDD{
+
+}
+namespace usecases.inventry_control #DDDDDD{
+
+}
+
+namespace usecases.inventry_control.impl #DDDDDD{
+interface InventoryControlInputReceiver
+
+}
+
+namespace usecases.inventry_control.impl.InputStockInteractor #DDDDDD{
+class InputStockInteractor
+interface InputReceiver
+
+InputStockInteractor--o InputReceiver
+InputReceiver<|-- usecases.inventry_control.impl.InventoryControlInputReceiver
+
+}
+
+namespace usecases.inventry_control.impl.MarkToMarketInteractor #DDDDDD{
+class MarkToMarketInteractor
+interface InputReceiver
+
+MarkToMarketInteractor--o InputReceiver
+InputReceiver<|-- usecases.inventry_control.impl.InventoryControlInputReceiver
+
+}
+
+namespace usecases.inventry_control.impl.ShowBalanceInteractor #DDDDDD{
+class ShowBalanceInteractor
+interface InputReceiver
+
+ShowBalanceInteractor--o InputReceiver
+InputReceiver<|-- usecases.inventry_control.impl.InventoryControlInputReceiver
+
+}
+
+
+namespace usecases.trade  #DDDDDD{
+}
+namespace usecases.trade.impl  #DDDDDD{
+
+interface TradeInputReceiver
+
+}
+
+namespace usecases.trade.impl.CancelInteractor #DDDDDD{
+class CancelInteractor
+interface InputReceiver
+
+CancelInteractor--o InputReceiver
+InputReceiver<|-- usecases.trade.impl.TradeInputReceiver
+
+}
+
+namespace usecases.trade.impl.FinalClosingInteractor #DDDDDD{
+class FinalClosingInteractor
+interface InputReceiver
+
+
+FinalClosingInteractor--o InputReceiver
+InputReceiver<|-- usecases.trade.impl.TradeInputReceiver
+
+}
+
+namespace usecases.trade.impl.TradeInteractor #DDDDDD{
+class TradeInteractor
+interface InputReceiver
+
+TradeInteractor--o InputReceiver
+InputReceiver<|-- usecases.trade.impl.TradeInputReceiver
+
+}
+namespace usecases.ui #DDDDDD{
+
+}
+
+namespace usecases.ui.MenuInteractor #DDDDDD{
+class MenuInteractor
+interface InputReceiver
+
+MenuInteractor--o InputReceiver
+
+}
+
+
+
+
+
+
+
+
+
+
+
+namespace interface_adapter #DDDDDD{
+
+}
+namespace interface_adapter.input_receiver #DDDDDD{
+abstract AInputReceiver
+class InputReceiver
+
+AInputReceiver<|--InputReceiver
+usecases.inventry_control.impl.InventoryControlInputReceiver<|--AInputReceiver
+usecases.trade.impl.TradeInputReceiver<|--AInputReceiver
+usecases.ui.MenuInteractor.InputReceiver<|--AInputReceiver
+}
+
+
+@enduml

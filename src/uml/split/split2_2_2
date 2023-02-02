@@ -1,0 +1,41 @@
+@startuml
+namespace entities #DDDDDD {
+
+}
+namespace entities.issues_impl #DDDDDD {
+interface BalanceMap
+interface BalanceMapMutable
+interface IssueInfoMap
+
+BalanceMap<|-- BalanceMapMutable
+
+}
+
+
+
+namespace usecases #DDDDDD {
+}
+
+
+namespace usecases.model #DDDDDD {
+interface BalanceMapInteractor
+
+entities.issues_impl.BalanceMap o--BalanceMapInteractor
+}
+
+namespace usecases.model.impl #DDDDDD {
+}
+namespace usecases.model.impl.BalanceMapInteractorImpl #DDDDDD {
+class BalanceMapInteractorImpl
+class BalanceMapImplSynchronized
+
+usecases.model.BalanceMapInteractor<|--BalanceMapInteractorImpl
+entities.issues_impl.BalanceMapMutable<|--BalanceMapImplSynchronized
+
+BalanceMapImplSynchronized o-- BalanceMapInteractorImpl
+BalanceMapImplSynchronized --* BalanceMapInteractorImpl
+entities.issues_impl.IssueInfoMap o-- BalanceMapInteractorImpl
+
+
+}
+@enduml

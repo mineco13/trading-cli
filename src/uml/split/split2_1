@@ -1,0 +1,51 @@
+@startuml
+
+namespace entities #DDDDDD {
+
+}
+namespace entities.issues_impl #DDDDDD {
+interface IssueInfoMap
+
+}
+
+
+
+namespace usecases #DDDDDD {
+}
+
+
+namespace usecases.model #DDDDDD {
+
+interface IssueInfoInteractor
+
+entities.issues_impl.IssueInfoMap o--IssueInfoInteractor
+
+}
+
+namespace usecases.model.impl #DDDDDD {
+
+}
+
+namespace usecases.model.impl.InventoryInteractorImpl #DDDDDD {
+
+}
+
+namespace usecases.model.impl.IssueInfoInteractorImpl #DDDDDD {
+class IssueInfoInteractorImpl
+interface Repository
+class IssueInfoMapImpl
+
+usecases.model.IssueInfoInteractor<|--IssueInfoInteractorImpl
+entities.issues_impl.IssueInfoMap<|-- IssueInfoMapImpl
+
+IssueInfoInteractorImpl--o Repository
+IssueInfoInteractorImpl -o IssueInfoMapImpl
+
+}
+
+namespace usecases.model.impl.TransactionHistoryInteractorImpl #DDDDDD {
+
+}
+
+
+@enduml

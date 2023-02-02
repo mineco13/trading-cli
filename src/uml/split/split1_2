@@ -1,0 +1,38 @@
+@startuml
+namespace kotlin.collections #DDDDDD {
+interface Map
+interface List
+interface MutableMap
+interface MutableList
+
+Map <|-- MutableMap
+List <|-- MutableList
+MutableMap --[hidden] List
+}
+
+namespace entities #DDDDDD {
+
+interface Position
+interface Portfolio
+interface PortfolioMutable
+
+Portfolio<|-- PortfolioMutable
+kotlin.collections.Map<|--Portfolio
+kotlin.collections.MutableMap<|--PortfolioMutable
+
+Position o-- Portfolio
+}
+namespace entities.issues_impl #DDDDDD {
+abstract PortfolioImpl
+interface TransactionHistory
+interface TransactionHistoryMutable
+
+
+entities.PortfolioMutable<|--PortfolioImpl
+kotlin.collections.List<|--TransactionHistory
+kotlin.collections.MutableList<|--TransactionHistoryMutable
+TransactionHistory<|--TransactionHistoryMutable
+
+entities.Position o--TransactionHistory
+}
+@enduml

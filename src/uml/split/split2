@@ -1,0 +1,127 @@
+@startuml
+
+namespace entities #DDDDDD {
+
+interface Position
+interface IssueInfo
+interface Portfolio
+interface PortfolioMutable
+
+Portfolio<|- PortfolioMutable
+
+Position o- Portfolio
+}
+namespace entities.issues_impl #DDDDDD {
+interface Balance
+class BalanceImpl
+interface BalanceMap
+interface BalanceMapMutable
+interface Inventory
+interface InventoryMutable
+interface IssueInfoMap
+abstract PortfolioImpl
+interface TransactionHistoryMutable
+
+entities.IssueInfo<|--Balance
+entities.Position<|--Balance
+Balance <|--BalanceImpl
+entities.Portfolio<|--BalanceMap
+BalanceMap<|- BalanceMapMutable
+entities.PortfolioMutable<|--BalanceMapMutable
+entities.Portfolio<|--Inventory
+Inventory<|- InventoryMutable
+entities.PortfolioMutable<|--InventoryMutable
+entities.PortfolioMutable<|--PortfolioImpl
+
+Balance o--BalanceMap
+Balance o--Inventory
+entities.IssueInfo o--IssueInfoMap
+entities.Position o--TransactionHistoryMutable
+}
+
+
+
+namespace usecases #DDDDDD {
+}
+
+
+namespace usecases.model #DDDDDD {
+interface BalanceMapInteractor
+interface InventoryInteractor
+interface IssueInfoInteractor
+interface TransactionHistoryInteractor
+
+entities.issues_impl.BalanceMap o-- BalanceMapInteractor
+entities.issues_impl.InventoryMutable o-- InventoryInteractor
+entities.issues_impl.IssueInfoMap o-- IssueInfoInteractor
+entities.issues_impl.TransactionHistoryMutable o-- TransactionHistoryInteractor
+
+}
+
+namespace usecases.model.impl #DDDDDD {
+class BalanceMapInteractorImpl
+class BalanceMapImplSynchronized
+
+usecases.model.BalanceMapInteractor <|-- BalanceMapInteractorImpl
+entities.issues_impl.BalanceMapMutable <|-- BalanceMapImplSynchronized
+entities.issues_impl.PortfolioImpl <|-- BalanceMapImplSynchronized
+
+
+BalanceMapInteractorImpl --o BalanceMapImplSynchronized
+BalanceMapInteractorImpl *-- BalanceMapImplSynchronized
+entities.issues_impl.BalanceImpl o-- BalanceMapImplSynchronized
+
+}
+
+namespace usecases.model.impl.InventoryInteractorImpl #DDDDDD {
+class InventoryInteractorImpl
+interface Repository
+class InventoryImplSynchronized
+
+usecases.model.InventoryInteractor<|--InventoryInteractorImpl
+entities.issues_impl.InventoryMutable<|--InventoryImplSynchronized
+entities.issues_impl.PortfolioImpl <|-- InventoryImplSynchronized
+
+
+InventoryInteractorImpl --o Repository
+InventoryInteractorImpl -o InventoryImplSynchronized
+InventoryInteractorImpl *- InventoryImplSynchronized
+entities.issues_impl.BalanceMapMutable o-- InventoryInteractorImpl
+entities.issues_impl.IssueInfoMap o-- InventoryInteractorImpl
+
+entities.issues_impl.BalanceImpl o-- InventoryImplSynchronized
+
+}
+
+namespace usecases.model.impl.IssueInfoInteractorImpl #DDDDDD {
+class IssueInfoInteractorImpl
+interface Repository
+class IssueInfoMapImpl
+
+usecases.model.IssueInfoInteractor <|-- IssueInfoInteractorImpl
+entities.issues_impl.IssueInfoMap <|-- IssueInfoMapImpl
+
+IssueInfoInteractorImpl --o Repository
+IssueInfoInteractorImpl -o IssueInfoMapImpl
+
+}
+
+namespace usecases.model.impl.TransactionHistoryInteractorImpl #DDDDDD {
+class TransactionHistoryInteractorImpl
+interface Repository
+class TransactionHistoryImplSynchronized
+
+
+usecases.model.TransactionHistoryInteractor <|-- TransactionHistoryInteractorImpl
+entities.issues_impl.TransactionHistoryMutable <|-- TransactionHistoryImplSynchronized
+
+entities.issues_impl.BalanceMapMutable o-- TransactionHistoryInteractorImpl
+entities.issues_impl.InventoryMutable o-- TransactionHistoryInteractorImpl
+TransactionHistoryInteractorImpl -o TransactionHistoryImplSynchronized
+TransactionHistoryInteractorImpl *- TransactionHistoryImplSynchronized
+TransactionHistoryInteractorImpl --o Repository
+
+}
+
+
+@enduml

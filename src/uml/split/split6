@@ -1,0 +1,148 @@
+@startuml
+namespace usecases #DDDDDD{
+
+}
+
+
+namespace usecases.model #DDDDDD {
+
+}
+
+namespace usecases.model.impl #DDDDDD {
+
+}
+
+namespace usecases.model.impl.InventoryInteractorImpl #DDDDDD {
+class InventoryInteractorImpl
+interface Repository
+
+
+InventoryInteractorImpl--o Repository
+}
+
+namespace usecases.model.impl.IssueInfoInteractorImpl #DDDDDD {
+class IssueInfoInteractorImpl
+interface Repository
+
+
+IssueInfoInteractorImpl--o Repository
+
+}
+
+namespace usecases.model.impl.TransactionHistoryInteractorImpl #DDDDDD {
+class TransactionHistoryInteractorImpl
+interface Repository
+
+
+TransactionHistoryInteractorImpl--o Repository
+}
+
+
+
+
+
+
+namespace usecases.inventry_control #DDDDDD{
+
+}
+
+namespace usecases.inventry_control.impl #DDDDDD{
+
+}
+
+
+namespace usecases.trade  #DDDDDD{
+}
+namespace usecases.trade.impl  #DDDDDD{
+
+}
+
+
+
+namespace usecases.trade.impl.FinalClosingInteractor #DDDDDD{
+class FinalClosingInteractor
+interface Repository
+
+FinalClosingInteractor--o Repository
+
+}
+
+namespace usecases.ui #DDDDDD{
+
+}
+
+namespace usecases.ui.MenuInteractor #DDDDDD{
+class MenuInteractor
+interface Repository
+
+MenuInteractor--o Repository
+
+}
+
+
+
+
+
+
+
+
+
+
+
+namespace interface_adapter #DDDDDD{
+
+}
+
+
+
+namespace interface_adapter.repository #DDDDDD{
+class BalanceMapRepository
+class IssueInfoMapRepository
+interface ObjectListReader
+interface ObjectListWriter
+class TimeRepository
+class TransactionHistoryRepository
+
+ObjectListReader<|-ObjectListWriter
+usecases.model.impl.InventoryInteractorImpl.Repository<|--BalanceMapRepository
+usecases.model.impl.IssueInfoInteractorImpl.Repository<|--IssueInfoMapRepository
+usecases.model.impl.TransactionHistoryInteractorImpl.Repository<|--TransactionHistoryRepository
+usecases.ui.MenuInteractor.Repository <|-- TimeRepository
+usecases.trade.impl.FinalClosingInteractor.Repository <|-- TimeRepository
+
+
+BalanceMapRepository --o ObjectListWriter
+IssueInfoMapRepository --o ObjectListReader
+TransactionHistoryRepository --o ObjectListWriter
+TimeRepository --o ObjectListWriter
+
+}
+namespace interface_adapter.repository.converter #DDDDDD{
+class BalanceListWriter
+abstract CSVFileReader
+abstract CSVFileWriter
+class IssueListReader
+class PositionListWriter
+class SystemLogFileWriter
+
+CSVFileReader<|-CSVFileWriter
+interface_adapter.repository.ObjectListReader<|--CSVFileReader
+interface_adapter.repository.ObjectListWriter<|--CSVFileWriter
+interface_adapter.repository.ObjectListWriter<|-- SystemLogFileWriter
+
+CSVFileReader<|--IssueListReader
+CSVFileWriter<|--BalanceListWriter
+CSVFileWriter<|--PositionListWriter
+}
+
+namespace interface_adapter.repository.converter.dao #DDDDDD{
+class ListFileOpenHelper
+
+ListFileOpenHelper-|> interface_adapter.repository.ObjectListWriter
+
+ListFileOpenHelper o-- interface_adapter.repository.converter.CSVFileReader
+ListFileOpenHelper o-- interface_adapter.repository.converter.CSVFileWriter
+ListFileOpenHelper o-- interface_adapter.repository.converter.SystemLogFileWriter
+}
+
+@enduml

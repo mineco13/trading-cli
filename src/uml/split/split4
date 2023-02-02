@@ -1,0 +1,108 @@
+@startuml
+namespace usecases #DDDDDD{
+
+}
+namespace usecases.inventry_control #DDDDDD{
+
+}
+
+namespace usecases.inventry_control.impl #DDDDDD{
+
+}
+
+namespace usecases.inventry_control.impl.InputStockInteractor #DDDDDD{
+class InputStockInteractor
+interface Presenter
+
+InputStockInteractor--o Presenter
+
+}
+
+namespace usecases.inventry_control.impl.MarkToMarketInteractor #DDDDDD{
+class MarkToMarketInteractor
+interface Presenter
+
+MarkToMarketInteractor--o Presenter
+
+}
+
+namespace usecases.inventry_control.impl.ShowBalanceInteractor #DDDDDD{
+class ShowBalanceInteractor
+interface Presenter
+
+ShowBalanceInteractor--o Presenter
+
+}
+
+
+namespace usecases.trade  #DDDDDD{
+}
+namespace usecases.trade.impl  #DDDDDD{
+
+
+}
+
+namespace usecases.trade.impl.CancelInteractor #DDDDDD{
+class CancelInteractor
+interface Presenter
+
+CancelInteractor--o Presenter
+
+}
+
+namespace usecases.trade.impl.FinalClosingInteractor #DDDDDD{
+class FinalClosingInteractor
+interface Presenter
+
+
+FinalClosingInteractor--o Presenter
+
+}
+
+namespace usecases.trade.impl.TradeInteractor #DDDDDD{
+class TradeInteractor
+interface Presenter
+
+TradeInteractor--o Presenter
+
+}
+namespace usecases.ui #DDDDDD{
+
+}
+
+namespace usecases.ui.MenuInteractor #DDDDDD{
+class MenuInteractor
+interface Presenter
+
+MenuInteractor--o Presenter
+
+}
+
+
+
+
+
+
+namespace interface_adapter #DDDDDD{
+
+}
+
+namespace interface_adapter.presenter #DDDDDD{
+class InputStockPresenter
+class MarkToMarketPresenter
+class ShowBalancePresenter
+class CancelPresenter
+class FinalClosingPresenter
+class TradePresenter
+class MenuInteractorPresenter
+
+usecases.inventry_control.impl.InputStockInteractor.Presenter<|-- InputStockPresenter
+usecases.inventry_control.impl.MarkToMarketInteractor.Presenter<|-- MarkToMarketPresenter
+usecases.inventry_control.impl.ShowBalanceInteractor.Presenter<|-- ShowBalancePresenter
+usecases.trade.impl.CancelInteractor.Presenter<|-- CancelPresenter
+usecases.trade.impl.FinalClosingInteractor.Presenter<|-- FinalClosingPresenter
+usecases.trade.impl.TradeInteractor.Presenter<|-- TradePresenter
+usecases.ui.MenuInteractor.Presenter<|--MenuInteractorPresenter
+}
+
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+
+namespace kotlin.collections #DDDDDD {
+interface Map
+interface List
+interface MutableMap
+interface MutableList
+
+Map <|-- MutableMap
+List <|-- MutableList
+}
+
+namespace entities #DDDDDD {
+
+abstract Issue
+interface Position
+interface IssueInfo
+interface Portfolio
+interface PortfolioMutable
+
+Portfolio<|-- PortfolioMutable
+kotlin.collections.Map<|--Portfolio
+kotlin.collections.MutableMap<|--PortfolioMutable
+
+Issue o-- IssueInfo
+Issue o-- Position
+Position o-- Portfolio
+}
+namespace entities.issues_impl #DDDDDD {
+interface Balance
+class BalanceImpl
+interface BalanceMap
+interface BalanceMapMutable
+class Bond
+interface Inventory
+interface InventoryMutable
+class IssueInfoImpl
+interface IssueInfoMap
+abstract PortfolioImpl
+class PositionImpl
+interface TransactionHistory
+interface TransactionHistoryMutable
+
+entities.IssueInfo<|--Balance
+entities.Position<|--Balance
+Balance <|--BalanceImpl
+entities.Portfolio<|--BalanceMap
+BalanceMap<|-- BalanceMapMutable
+entities.PortfolioMutable<|--BalanceMapMutable
+entities.Issue<|--Bond
+entities.Portfolio<|--Inventory
+Inventory<|-- InventoryMutable
+entities.PortfolioMutable<|--InventoryMutable
+entities.IssueInfo<|--IssueInfoImpl
+kotlin.collections.Map<|--IssueInfoMap
+entities.PortfolioMutable<|--PortfolioImpl
+entities.Position<|--PositionImpl
+kotlin.collections.List<|--TransactionHistory
+kotlin.collections.MutableList<|--TransactionHistoryMutable
+TransactionHistory<|--TransactionHistoryMutable
+
+Balance o--BalanceMap
+Balance o--Inventory
+entities.IssueInfo o--IssueInfoMap
+entities.Position o--TransactionHistory
+}
+
+
+@enduml

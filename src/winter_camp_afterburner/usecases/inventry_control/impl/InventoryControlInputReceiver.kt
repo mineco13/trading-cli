@@ -1,0 +1,3 @@
+package winter_camp_afterburner.usecases.inventry_control.impl
+
+interface InventoryControlInputReceiver : InputStockInteractor.InputReceiver, MarkToMarketInteractor.InputReceiver

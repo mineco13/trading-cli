@@ -1,0 +1,110 @@
+namespace usecases.inventry_control #DDDDDD{
+
+}
+
+namespace usecases.inventry_control.impl  #DDDDDD{
+interface InventoryControlInputReceiver
+
+}
+
+namespace usecases.inventry_control.impl.InputStockInteractor #DDDDDD{
+class InputStockInteractor
+interface Presenter
+interface InputReceiver
+
+InputStockInteractor--o Presenter
+InputStockInteractor--o InputReceiver
+usecases.UseCase<|--InputStockInteractor
+InputReceiver<|-- usecases.inventry_control.impl.InventoryControlInputReceiver
+
+}
+
+namespace usecases.inventry_control.impl.MarkToMarketInteractor #DDDDDD{
+class MarkToMarketInteractor
+interface Presenter
+interface InputReceiver
+
+MarkToMarketInteractor--o Presenter
+MarkToMarketInteractor--o InputReceiver
+usecases.UseCase<|--MarkToMarketInteractor
+InputReceiver<|-- usecases.inventry_control.impl.InventoryControlInputReceiver
+
+}
+
+namespace usecases.inventry_control.impl.ShowBalanceInteractor #DDDDDD{
+class ShowBalanceInteractor
+interface Presenter
+interface InputReceiver
+
+ShowBalanceInteractor--o Presenter
+ShowBalanceInteractor--o InputReceiver
+usecases.UseCase<|--ShowBalanceInteractor
+InputReceiver<|-- usecases.inventry_control.impl.InventoryControlInputReceiver
+
+}
+
+
+
+namespace usecases.trade  #DDDDDD{
+}
+namespace usecases.trade.impl  #DDDDDD{
+
+interface TradeInputReceiver
+
+}
+
+namespace usecases.trade.impl.CancelInteractor #DDDDDD{
+class CancelInteractor
+interface Presenter
+interface InputReceiver
+
+CancelInteractor--o Presenter
+CancelInteractor--o InputReceiver
+usecases.UseCase<|--CancelInteractor
+InputReceiver<|-- usecases.trade.impl.TradeInputReceiver
+
+}
+
+namespace usecases.trade.impl.FinalClosingInteractor #DDDDDD{
+class FinalClosingInteractor
+interface Presenter
+interface InputReceiver
+interface Repository
+
+
+FinalClosingInteractor--o Presenter
+FinalClosingInteractor--o InputReceiver
+FinalClosingInteractor--o Repository
+usecases.UseCase<|-- FinalClosingInteractor
+InputReceiver<|-- usecases.trade.impl.TradeInputReceiver
+
+}
+
+namespace usecases.trade.impl.TradeInteractor #DDDDDD{
+class TradeInteractor
+interface Presenter
+interface InputReceiver
+
+TradeInteractor--o Presenter
+TradeInteractor--o InputReceiver
+usecases.UseCase<|--TradeInteractor
+InputReceiver<|-- usecases.trade.impl.TradeInputReceiver
+
+}
+namespace usecases.ui #DDDDDD{
+
+}
+
+namespace usecases.ui.MenuInteractor #DDDDDD{
+class MenuInteractor
+interface Presenter
+interface InputReceiver
+interface Repository
+
+MenuInteractor--o Presenter
+MenuInteractor--o InputReceiver
+MenuInteractor--o Repository
+usecases.UseCase o-- MenuInteractor
+
+}
+

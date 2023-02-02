@@ -1,0 +1,36 @@
+@startuml
+namespace kotlin.collections #DDDDDD {
+interface Map
+}
+
+namespace entities #DDDDDD {
+
+abstract Issue
+interface Position
+interface IssueInfo
+
+
+Issue o-- IssueInfo
+Issue o-- Position
+}
+namespace entities.issues_impl #DDDDDD {
+
+interface Balance
+class BalanceImpl
+class Bond
+class IssueInfoImpl
+interface IssueInfoMap
+class PositionImpl
+
+
+entities.IssueInfo<|--Balance
+entities.Position<|--Balance
+Balance <|--BalanceImpl
+entities.Issue<|--Bond
+entities.IssueInfo<|--IssueInfoImpl
+kotlin.collections.Map<|--IssueInfoMap
+entities.Position<|--PositionImpl
+
+entities.IssueInfo o--IssueInfoMap
+}
+@enduml

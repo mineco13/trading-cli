@@ -1,0 +1,58 @@
+@startuml
+
+namespace entities #DDDDDD {
+
+}
+namespace entities.issues_impl #DDDDDD {
+interface BalanceMapMutable
+interface InventoryMutable
+interface TransactionHistoryMutable
+
+
+}
+
+
+
+namespace usecases #DDDDDD {
+}
+
+
+namespace usecases.model #DDDDDD {
+interface TransactionHistoryInteractor
+
+entities.issues_impl.TransactionHistoryMutable o--TransactionHistoryInteractor
+
+}
+
+namespace usecases.model.impl #DDDDDD {
+
+}
+
+namespace usecases.model.impl.InventoryInteractorImpl #DDDDDD {
+
+}
+
+namespace usecases.model.impl.IssueInfoInteractorImpl #DDDDDD {
+
+}
+
+namespace usecases.model.impl.TransactionHistoryInteractorImpl #DDDDDD {
+class TransactionHistoryInteractorImpl
+interface Repository
+class TransactionHistoryImplSynchronized
+
+
+usecases.model.TransactionHistoryInteractor<|--TransactionHistoryInteractorImpl
+entities.issues_impl.TransactionHistoryMutable <|-- TransactionHistoryImplSynchronized
+
+
+entities.issues_impl.BalanceMapMutable o-- TransactionHistoryInteractorImpl
+entities.issues_impl.InventoryMutable o-- TransactionHistoryInteractorImpl
+TransactionHistoryImplSynchronized o-- TransactionHistoryInteractorImpl
+TransactionHistoryImplSynchronized --* TransactionHistoryInteractorImpl
+TransactionHistoryInteractorImpl--o Repository
+
+}
+
+
+@enduml

@@ -1,0 +1,82 @@
+
+
+namespace interface_adapter #DDDDDD{
+
+}
+namespace interface_adapter.input_receiver #DDDDDD{
+abstract AInputReceiver
+class InputReceiver
+
+AInputReceiver<|--InputReceiver
+usecases.inventry_control.impl.InventoryControlInputReceiver<|--AInputReceiver
+usecases.trade.impl.TradeInputReceiver<|--AInputReceiver
+usecases.ui.MenuInteractor.InputReceiver<|--AInputReceiver
+}
+
+namespace interface_adapter.presenter #DDDDDD{
+class InputStockPresenter
+class MarkToMarketPresenter
+class ShowBalancePresenter
+class CancelPresenter
+class FinalClosingPresenter
+class TradePresenter
+class MenuInteractorPresenter
+
+usecases.inventry_control.impl.InputStockInteractor.Presenter<|-- InputStockPresenter
+usecases.inventry_control.impl.MarkToMarketInteractor.Presenter<|-- MarkToMarketPresenter
+usecases.inventry_control.impl.ShowBalanceInteractor.Presenter<|-- ShowBalancePresenter
+usecases.trade.impl.CancelInteractor.Presenter<|-- CancelPresenter
+usecases.trade.impl.FinalClosingInteractor.Presenter<|-- FinalClosingPresenter
+usecases.trade.impl.TradeInteractor.Presenter<|-- TradePresenter
+usecases.ui.MenuInteractor.Presenter<|--MenuInteractorPresenter
+}
+
+namespace interface_adapter.repository #DDDDDD{
+class BalanceRepository
+class IssueRepository
+interface ObjectListReader
+interface ObjectListWriter
+class TimeRepository
+class TransactionHistoryRepository
+
+ObjectListReader<|-ObjectListWriter
+usecases.model.impl.InventoryDealerImpl.Repository<|--BalanceRepository
+usecases.model.impl.IssueInfoDealerImpl.Repository<|--IssueRepository
+usecases.model.impl.TransactionHistoryDealerImpl.Repository<|--TransactionHistoryRepository
+usecases.ui.MenuInteractor.Repository <|-- TimeRepository
+usecases.trade.impl.FinalClosingInteractor.Repository <|-- TimeRepository
+
+
+ObjectListWriter o--BalanceRepository
+ObjectListReader o--IssueRepository
+ObjectListWriter o--TransactionHistoryRepository
+ObjectListWriter o--TimeRepository
+
+}
+namespace interface_adapter.repository.converter #DDDDDD{
+class BalanceListWriter
+abstract CSVFileReader
+abstract CSVFileWriter
+class IssueListReader
+class PositionListWriter
+class SystemLogFileWriter
+
+CSVFileReader<|-CSVFileWriter
+interface_adapter.repository.ObjectListReader<|--CSVFileReader
+interface_adapter.repository.ObjectListWriter<|--CSVFileWriter
+interface_adapter.repository.ObjectListWriter<|-- SystemLogFileWriter
+interface_adapter.repository.ObjectListWriter<|--SystemLogFileWriter
+CSVFileReader<|--IssueListReader
+CSVFileWriter<|--BalanceListWriter
+CSVFileWriter<|--PositionListWriter
+}
+
+namespace interface_adapter.repository.converter.dao #DDDDDD{
+class ListFileOpenHelper
+
+ListFileOpenHelper-|> interface_adapter.repository.ObjectListWriter
+
+ListFileOpenHelper o-- interface_adapter.repository.converter.CSVFileReader
+ListFileOpenHelper o-- interface_adapter.repository.converter.CSVFileWriter
+ListFileOpenHelper o-- interface_adapter.repository.converter.SystemLogFileWriter
+}

@@ -1,0 +1,24 @@
+@startuml
+namespace entities #DDDDDD {
+
+interface Position
+interface Portfolio
+interface PortfolioMutable
+
+Portfolio<|-- PortfolioMutable
+Position o-- Portfolio
+}
+namespace entities.issues_impl #DDDDDD {
+interface Balance
+interface Inventory
+interface InventoryMutable
+
+
+entities.Position<|-Balance
+entities.Portfolio<|-Inventory
+Inventory<|-- InventoryMutable
+entities.PortfolioMutable<|-InventoryMutable
+
+Balance o--Inventory
+}
+@enduml
