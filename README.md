@@ -2,11 +2,11 @@
 
 The code in this repository was written in 2019.
 
-I tried to apply the _Clean Architecture_ using Kotlin.
+I tried to apply the _Clean Architecture_ using [Kotlin](https://kotlinlang.org/docs/comparison-to-java.html).
 
-## Kotlin is an excellent Null safety﻿ language that has 100% interoperability with Java.
+## Kotlin is an excellent [Null safety](https://kotlinlang.org/docs/null-safety.html#nullable-types-and-non-nullable-types) language that has 100% [interoperability](https://kotlinlang.org/docs/java-to-kotlin-interop.html) with Java.
 
-The pros which Kotlin has compared with Java are that Kotlin can write code shorter than Java thanks to its features like type inference and expression-oriented.
+**Kotlin** allows for writing code **shorter** than Java, thanks to [features](https://kotlinlang.org/docs/idioms.html) like [type inference](https://kotlinlang.org/docs/basic-syntax.html#variables) and [expression-oriented](https://kotlinlang.org/docs/control-flow.html) programming.
 
 <details>
 <summary>Java 8</summary>
@@ -55,7 +55,7 @@ class Animal<T extends String>{
 
 </details>
 
-<details>
+<details open>
 <summary>Kotlin</summary>
 
 ```Kotlin
@@ -80,7 +80,7 @@ class Animal<T: String>(var name: T)
 
 </details>
 
-And Kotlin keeps the code clean because it focuses on immutability and delegation, not inheritance.
+And **Kotlin** keeps the code **clean** because it focuses on [immutability](https://kotlinlang.org/docs/coding-conventions.html#immutability) and [delegation](https://kotlinlang.org/docs/delegation.html), not inheritance.
 
 <details>
 <summary>Java 8</summary>
@@ -116,7 +116,7 @@ class MetricSpaceImpl implements MetricSpace{
 
 </details>
 
-<details>
+<details open>
 <summary>Kotlin</summary>
 
 ```Kotlin
